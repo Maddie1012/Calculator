@@ -4,6 +4,7 @@ let valueOperation = document.querySelector('.value__operation');
 let numAndOperations = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '*', '%', '-', '+', ','];
 const maxLength = 10;
 
+
 function writeNum(event) {
     let value = event.target.textContent
     let isInArr = numAndOperations.includes(value)
@@ -24,11 +25,39 @@ function clearPanel() {
 }
 
 function calculate() {
-    let numbers = [];
-    let operators = [];
-    
     const res = result.textContent
-    console.log(res)
+    const regex = /(\d+\.?\d*)([\+\-\*\/])(\d+\.?\d*)/;
+    const filterArr = res.match(regex)
+
+    let firstNum = parseFloat(filterArr[1])
+    let secondNum = parseFloat(filterArr[3])
+    let operator = filterArr[2]
+    let calcilation;
+
+    
+    switch(operator) {
+        case '+':
+            calcilation = firstNum + secondNum;
+        break;
+        case '-':
+            calcilation = firstNum - secondNum;
+        break;
+        case '*':
+            calcilation = firstNum * secondNum;
+        break;
+        case '/':
+            if(secondNum === 0) {
+                result.textContent === 'Error';
+                return;
+            }
+            calcilation = firstNum / secondNum;
+        break;
+        default:
+            result.textContent === 'Error';
+            return;
+    }
+    valueOperation.textContent = result.textContent
+    result.textContent = calcilation.toString()
 }
 
 // очистка панели

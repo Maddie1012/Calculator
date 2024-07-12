@@ -95,7 +95,7 @@ body {
 .container__values .container__text {
   display: flex;
   justify-content: flex-end;
-  height: 32.5%;
+  height: 20px;
   margin: 0 0 8px 0;
 }
 .container__values .container__text .value__operation {
