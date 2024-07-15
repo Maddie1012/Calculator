@@ -34,7 +34,6 @@ function calculate() {
     let operator = filterArr[2]
     let calcilation;
 
-    
     switch(operator) {
         case '+':
             calcilation = firstNum + secondNum;
@@ -60,6 +59,20 @@ function calculate() {
     result.textContent = calcilation.toString()
 }
 
+function calcPercent() {
+    const res = result.textContent;
+    const regex = /(\d+(\.\d+)?)/g;
+    const numbers = res.match(regex);
+
+    if (numbers && numbers.length > 0) {
+        let num = parseFloat(numbers[numbers.length - 1]);
+        const percent = num / 100;
+        result.textContent = percent.toString();
+    } else {
+        result.textContent = 'Error';
+    }
+}
+
 // очистка панели
 buttons[0].addEventListener('click', clearPanel)
 
@@ -73,4 +86,6 @@ buttons.forEach(function(elem) {
 
 //произведение операций при нажатии на кнопку =
 buttons[buttons.length - 1].addEventListener('click', calculate)
+
+buttons[2].addEventListener('click', calcPercent)
 
